@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <!--添加一个控制台追加器-->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout>
+                <pattern>[%-5p] %d %c - %m%n</pattern>
+            </PatternLayout>
+        </Console>
+        <!--添加一个文本追加器，文件位于根目录下，名为log.log-->
+        <!--<File name="File" fileName="jzh.log">-->
+            <!--<PatternLayout>-->
+                <!--<pattern>[%-5p] %d %c - %m%n</pattern>-->
+            <!--</PatternLayout>-->
+        <!--</File>-->
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+        </Root>
+<!--
+        Logger 匹配org.springframework包下的所有日志，输出级别为info。我们在Appenders中添加了一个File，将org.springframework的日志打印到该文件
+-->
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="File" />
+        </Logger>
+    </Loggers>
+</Configuration>

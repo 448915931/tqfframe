@@ -1,0 +1,13 @@
+#数据库配置
+spring:
+  datasource:
+     url: jdbc:mysql://localhost:3306/testdba?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+     username: root
+     password: 123456
+     driver-class-name: com.mysql.jdbc.Driver
+     type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.tqfframe.entity

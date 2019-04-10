@@ -1,0 +1,22 @@
+##dev：本地环境；prd测试环境
+spring:
+  profiles:
+      active: prd
+  application:
+    name: tqf-admin
+
+server:
+  port: 9098
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+

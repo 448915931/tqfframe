@@ -1,0 +1,48 @@
+server:
+  port: 9090
+#  servlet: //项目根目录
+#    context-path: /api
+
+spring:
+  application:
+    name: zuul-server
+  ##dev：本地环境；prd测试环境
+  profiles:
+      active: prd
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#  instance:
+#    hostname: device
+#    prefer-ip-address: true
+#    status-page-url: http://localhost:8761/swagger-ui.html
+
+zuul:
+  #prefix是包含/api经过下面路由则进行
+  prefix: /api
+  #routes下面的参数为自己自定义的，比如test和 customer-by-address等
+  #后端的位置可以被指定为“serviceId”（对于来自发现的服务customer-service是客户端的application名）或“url”（对于物理位置）。
+  #使用serviceId方式用来发现多个相同服务实例来实现负载均衡，所以尽量使用serviceId而不是url
+  routes:
+#    fristurl:
+#      path: /fristurl/**
+#      url: http://localhost:9098 #客户端接口地址
+    adminurl:
+      path: /adminurl/**
+      serviceId: tqf-admin          #服务提供端
+    phoneurl:
+      path: /phoneurl/**
+      serviceId: tqf-phoneserver    #图片服务器接口
+    webapiurl:
+      path: /webapiurl/**
+      serviceId: tqf-web             #用于提供web服务的接口，消费端
+#    static:
+#      path: /static/**               #静态文件
+
+
+jwt:
+  constantKey:
+    key: "spring-security-@Jwt!&Secret^#"     #jwt签名key
+

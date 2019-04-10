@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tqfframe.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.tqfframe.entity.UserEntity">
+
+    </resultMap>
+    <select id="qulitycounts"   resultType ="java.lang.String" >
+       select count(*) numbers from test
+    </select>
+
+</mapper>

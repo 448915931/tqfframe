@@ -1,0 +1,21 @@
+server:
+  port: 9096
+
+spring:
+  application:
+    name: tqf-web
+  profiles:
+      active: prd
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
