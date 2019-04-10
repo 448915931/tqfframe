@@ -2,7 +2,6 @@ package com.tqfframe.service;
 
 import com.tqfframe.dao.UserDao;
 import com.tqfframe.entity.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -32,6 +32,10 @@
             <groupId>com.tqfframe</groupId>
             <artifactId>tqf-common-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.tqfframe</groupId>
+            <artifactId>tqf-common-jwt</artifactId>
+        </dependency>
         <!-- 增加groovy依赖，用于zuul配置-->
         <!--<dependency>-->
             <!--<groupId>org.codehaus.groovy</groupId>-->

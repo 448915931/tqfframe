@@ -29,6 +29,10 @@
             <artifactId>tqf-common-sql</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.tqfframe</groupId>
+            <artifactId>tqf-common-jwt</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

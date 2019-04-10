@@ -71,8 +71,9 @@ public class ProduceController {
      */
     @ApiOperation(value = "你好啊",notes = "你好")
     @GetMapping(value = "hello", produces={"application/json;","text/html;charset=UTF-8;"})
-    public String index() {
-        return "我是实例2，端口:"+port;
+    public ResultUtil index() {
+        System.out.println("我是实例2，端口:"+port);
+        return ResultUtil.ok();
     }
     /**
      * 测试控制器

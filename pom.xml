@@ -109,6 +109,12 @@
                 <artifactId>tqf-common-util</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
+            <!--jwt依赖-->
+            <dependency>
+                <groupId>com.tqfframe</groupId>
+                <artifactId>tqf-common-jwt</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
