@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js"
                 ).permitAll()
+                 .antMatchers("/users/registe","/testapi/testhello").permitAll()
                  //允许swagger相关的路径通关
                  .antMatchers(AUTH_WHITELIST).permitAll()
                  //上面的路径直接通过，其他路径都经过拦截进行认证处理

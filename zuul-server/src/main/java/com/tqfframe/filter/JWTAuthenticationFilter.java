@@ -1,5 +1,6 @@
 package com.tqfframe.filter;
 
+import com.tqfframe.constant.ConstantKey;
 import com.tqfframe.exception.TokenException;
 import com.tqfframe.handler.GrantedAuthorityImpl;
 import io.jsonwebtoken.*;
@@ -34,8 +35,6 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         super(authenticationManager);
     }
 
-    @Value("${jwt.constantKey.key}")
-    private String ConstantKey;
 
     //用户请求时，接收header
     @Override
@@ -67,7 +66,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         String user = null;
         try {
             user = Jwts.parser()
-                    .setSigningKey(ConstantKey)
+                    .setSigningKey(ConstantKey.SIGNING_KEY)     //通过签名key去判断是自己创建的token
                     .parseClaimsJws(token.replace("Bearer ", ""))
                     .getBody()
                     .getSubject();

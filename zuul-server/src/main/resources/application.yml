@@ -8,7 +8,7 @@ spring:
     name: zuul-server
   ##dev：本地环境；prd测试环境
   profiles:
-      active: prd
+      active: dev
 
 eureka:
   client:
@@ -42,7 +42,4 @@ zuul:
 #      path: /static/**               #静态文件
 
 
-jwt:
-  constantKey:
-    key: "spring-security-@Jwt!&Secret^#"     #jwt签名key
 

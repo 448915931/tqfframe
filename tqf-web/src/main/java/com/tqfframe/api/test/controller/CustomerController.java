@@ -37,7 +37,7 @@ public class CustomerController {
      *    http://localhost:9090/api/tqf-web/testapi/testhello
      * @return
      */
-    @ApiOperation(value = "订单", notes = "订单")
+    @ApiOperation(value = "消费端测试", notes = "消费端测试")
     @GetMapping(value ="/testhello", produces={"application/json;","text/html;charset=UTF-8;"})
     public ResultUtil testhello(){
         customerService.getTest();

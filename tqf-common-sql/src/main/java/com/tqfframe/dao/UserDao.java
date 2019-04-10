@@ -9,8 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserDao {
 
     String qulitycounts();
-    //查询用户是否存在
+    //查询用户
     UserEntity selectUserinfo(String username);
     //注册用户
     int inserUser(UserEntity user);
+
 }

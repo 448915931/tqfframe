@@ -1,7 +1,7 @@
 ##dev：本地环境；prd测试环境
 spring:
   profiles:
-      active: prd
+      active: dev
   application:
     name: tqf-admin
 

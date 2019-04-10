@@ -13,7 +13,7 @@
        select count(*) numbers from test
     </select>
     <select id="selectUserinfo" parameterType="java.lang.String"  resultMap ="BaseResultMap" >
-       select *  from tqf_user
+       select *  from tqf_user where username=#{username}
     </select>
     <insert id="inserUser" parameterType="com.tqfframe.entity.UserEntity" >
         insert into tqf_user (<include refid="data"/>) values (#{username},#{password})

@@ -20,8 +20,8 @@ public class UserController extends BaseController {
      * @param user
      */
     @ApiOperation(value = "注册用户")
-    @PostMapping("/signup")
-    public ResultUtil signup(@RequestBody UserEntity user) {
+    @PostMapping("/registe")
+    public ResultUtil registe(@RequestBody UserEntity user) {
         UserEntity bizUser =  userDao.selectUserinfo(user.getUsername());
         if(null != bizUser){
             throw new UsernameIsExitedException("用户已经存在");

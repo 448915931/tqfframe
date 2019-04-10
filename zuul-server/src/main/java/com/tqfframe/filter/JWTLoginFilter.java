@@ -1,6 +1,7 @@
 package com.tqfframe.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tqfframe.constant.ConstantKey;
 import com.tqfframe.entity.UserEntity;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -28,8 +29,6 @@ import java.util.*;
  */
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
-    @Value("${jwt.constantKey.key}")
-    private String ConstantKey;
 
     private AuthenticationManager authenticationManager;
 
@@ -79,11 +78,12 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             // 设置过期时间
             calendar.add(Calendar.MINUTE, 10);// 10分钟
             Date time = calendar.getTime();
+            System.out.println(ConstantKey.SIGNING_KEY);
             token = Jwts.builder()
                     .setSubject(auth.getName() + "-" + roleList)
                     .setIssuedAt(now)//签发时间
                     .setExpiration(time)//过期时间
-                    .signWith(SignatureAlgorithm.HS512, ConstantKey) //采用什么算法是可以自己选择的，不一定非要采用HS512
+                    .signWith(SignatureAlgorithm.HS512, ConstantKey.SIGNING_KEY) //采用什么算法是可以自己选择的，不一定非要采用HS512
                     .compact();
             System.out.println("token:"+token);
             // 登录成功后，返回token到header里面

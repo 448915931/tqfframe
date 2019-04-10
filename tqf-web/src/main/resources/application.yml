@@ -2,10 +2,10 @@ server:
   port: 9096
 
 spring:
+  profiles:
+    active: dev
   application:
     name: tqf-web
-  profiles:
-      active: prd
 
 eureka:
   instance:
