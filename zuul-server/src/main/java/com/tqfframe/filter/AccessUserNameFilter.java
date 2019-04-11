@@ -7,6 +7,12 @@ import com.netflix.zuul.context.RequestContext;
 
 
 public class AccessUserNameFilter extends ZuulFilter {
+    /**
+     *  经过zuul网关的接口，给原始接口加header
+     *  作用：避免其他项目在认证完zuul的jwt认证后，进入项目接口再次进行security jwt认证的时候会空token。所以要给zuul加header！！！
+     *
+     * @return
+     */
     @Override
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();

@@ -15,6 +15,9 @@
     <select id="selectUserinfo" parameterType="java.lang.String"  resultMap ="BaseResultMap" >
        select *  from tqf_user where username=#{username}
     </select>
+    <select id="selectUser" parameterType="com.tqfframe.entity.UserEntity"  resultMap ="BaseResultMap" >
+       select *  from tqf_user where username=#{username} and password=#{password}
+    </select>
     <insert id="inserUser" parameterType="com.tqfframe.entity.UserEntity" >
         insert into tqf_user (<include refid="data"/>) values (#{username},#{password})
     </insert>

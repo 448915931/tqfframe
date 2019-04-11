@@ -26,6 +26,10 @@ public class SpringCloudZuulExampleApplication
         SpringApplication.run(SpringCloudZuulExampleApplication.class, args);
 
     }
+
+    /**
+     *  项目启动加载AccessUserNameFilter类，用于给zuul网关接口加header
+     */
     @Bean
     public AccessUserNameFilter accessUserNameFilter(){
     return new AccessUserNameFilter();

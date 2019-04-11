@@ -57,6 +57,10 @@
             <groupId>com.tqfframe</groupId>
             <artifactId>tqf-common-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.tqfframe</groupId>
+            <artifactId>tqf-common-sql</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

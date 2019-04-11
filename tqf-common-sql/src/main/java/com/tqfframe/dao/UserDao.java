@@ -13,5 +13,6 @@ public interface UserDao {
     UserEntity selectUserinfo(String username);
     //注册用户
     int inserUser(UserEntity user);
-
+    //用户验证
+    UserEntity selectUser(UserEntity userEntity);
 }

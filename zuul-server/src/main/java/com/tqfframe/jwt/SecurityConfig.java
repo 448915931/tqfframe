@@ -33,19 +33,6 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Resource
-    private UserDetailsService userDetailsService;
-
-    //配置BCryptPasswordEncoderbean，这样其他类中就可以注入BCryptPasswordEncoder了
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     /**
      * HTTP请求处理
      */

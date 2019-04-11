@@ -50,7 +50,7 @@ public class BasicHttpSecurityConfig {
                     //允许通过的接口
                 .antMatchers("/login",      //登录接口不用过滤
                         "/**/authcenterurl/login",     //登录接口不用过滤
-                        "/**/users/registe"             //注册接口不用过滤
+                        "/**/registe"             //注册接口不用过滤
 //                        ,"/produceapi/hello"      //如果哪个接口不想被认证可以这样
 //                        ,"/api/webapiurl/**"     //允许整个目录不需要认证
                 ).permitAll()

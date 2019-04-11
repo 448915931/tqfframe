@@ -4,6 +4,7 @@ import com.tqfframe.ResultUtil;
 import com.tqfframe.constant.ConstantKey;
 import com.tqfframe.dao.UserDao;
 import com.tqfframe.entity.UserEntity;
+import com.tqfframe.exception.UsernameIsExitedException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.swagger.annotations.Api;
@@ -22,7 +23,7 @@ import java.util.List;
 
 @RestController
 @Api(description = "用户登录controller")
-public class LoginController {
+public class LoginController  extends BaseController {
 
     @Resource
     private UserDao userDao;
@@ -30,8 +31,10 @@ public class LoginController {
     @ApiOperation(value = "自定义登录")
     @PostMapping(value = "/login", produces={"application/json;","text/html;charset=UTF-8;"})
     public ResultUtil login(@RequestBody UserEntity user,HttpServletResponse response) {
-        UserEntity userVo = userDao.selectUserinfo(user.getUsername());
-        System.out.println(userVo.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+        UserEntity userVo = userDao.selectUser(user);
         if (userVo != null) {
             // 这里可以根据用户信息查询对应的角色信息，这里为了简单，我直接设置个空list
             List roleList = new ArrayList<>();
@@ -57,5 +60,26 @@ public class LoginController {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
+    /**
+     * 注册用户
+     * @param user
+     */
+    @ApiOperation(value = "注册用户")
+    @PostMapping("/registe")
+    public ResultUtil registe(@RequestBody UserEntity user) {
+        UserEntity bizUser =  userDao.selectUserinfo(user.getUsername());
+        if(null != bizUser){
+            throw new UsernameIsExitedException("用户已经存在");
+//            return ResultUtil.error("用户已经存在");
+        }
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        int result=userDao.inserUser(user);
+        if(result==1){
+            return ResultUtil.ok();
+        } else {
+            return ResultUtil.error("注册失败");
+        }
+
+    }
 
 }
