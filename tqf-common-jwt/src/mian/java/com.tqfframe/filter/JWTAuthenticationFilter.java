@@ -39,7 +39,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
     //用户请求时，接收header
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String header = request.getHeader("Authorization");
+        String header = request.getHeader("token");
         System.out.println("---------------访问1");
         System.out.println(header);
         if (header == null || !header.startsWith("Bearer ")) {
@@ -58,7 +58,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
     //username和password被获得后封装到一个UsernamePasswordAuthenticationToken（Authentication接口的实例）的实例中
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         long start = System.currentTimeMillis();
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("token");
         if (token == null || token.isEmpty()) {
             throw new TokenException("Token为空");
         }

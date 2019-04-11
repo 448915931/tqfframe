@@ -35,6 +35,7 @@ public class LoginController {
         if (userVo != null) {
             // 这里可以根据用户信息查询对应的角色信息，这里为了简单，我直接设置个空list
             List roleList = new ArrayList<>();
+            roleList.add("ADMIN");
             String subject = userVo.getUsername() + "-" + roleList;
             String token = Jwts.builder()
                     .setSubject(subject)
@@ -42,7 +43,7 @@ public class LoginController {
                     .signWith(SignatureAlgorithm.HS512, ConstantKey.SIGNING_KEY) //采用什么算法是可以自己选择的，不一定非要采用HS512
                     .compact();
             // 登录成功后，返回token到header里面
-            response.addHeader("Authorization", "Bearer " + token);
+            response.addHeader("token", "Bearer " + token);
             return ResultUtil.ok("Bearer " + token);
         }
         return ResultUtil.error("登录失败");

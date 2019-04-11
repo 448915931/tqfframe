@@ -22,7 +22,7 @@ public class Http401AuthenticationEntryPoint implements AuthenticationEntryPoint
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.setHeader("Authorization", this.headerValue);
+        response.setHeader("token", this.headerValue);
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
     }
 
