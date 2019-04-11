@@ -1,0 +1,21 @@
+server:
+  port: 9095
+
+spring:
+  profiles:
+    active: prd
+  application:
+    name: auth-center
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+

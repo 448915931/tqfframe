@@ -5,8 +5,8 @@ package com.tqfframe.entity;
  */
 public class UserEntity {
     private int id;
-    private String username;
     private String password;
+    private String username;
 
     public int getId() {
         return id;

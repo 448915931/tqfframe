@@ -29,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        System.out.println("Security加载。。。。。");
-        BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager());
+        //弃用csrf
+        http.csrf().disable();
     }
 
 }

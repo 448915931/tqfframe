@@ -65,7 +65,7 @@ public class ProduceController {
 
     /**
      *
-     * http://localhost:9090/api/tqf-admin/produceapi/hello   经过eureka和zuul，实际访问是 http://localhost:9098/produceapi/hello/
+     * http://localhost:9090/api/tqf-admin/produceapi/hello   经过eureka和zuul，实际访问是 http://localhost:9098/produceapi/hello
      * http://localhost:9090/api/adminurl/produceapi/hello      通过zuul定义的serviceId方式的反向代理进行访问,创建多个实例实现负载均衡
      * @return
      */

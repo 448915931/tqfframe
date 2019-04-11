@@ -54,6 +54,9 @@ public class DocumentationConfig implements SwaggerResourcesProvider {
     private SwaggerResource swaggerResource(String name, String location, String version) {
         //修改下列列表名称
         switch(name){
+            case "authcenterurl" :
+                name="jwt注册中心";
+                break;
             case "adminurl" :
                 name="服务提供端";
                 break;

@@ -18,6 +18,7 @@
         <module>tqf-common-sql</module>
         <module>tqf-common-util</module>
         <module>tqf-common-jwt</module>
+        <module>auth-center</module>
     </modules>
 
     <parent>

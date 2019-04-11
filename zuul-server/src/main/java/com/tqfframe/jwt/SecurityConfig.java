@@ -27,7 +27,7 @@ import java.util.List;
 /**
  *  一些理解：如果只配zuul的jwt认证，那么进入zuul网关的接口会进行认证。
  *  如果不走网关，直接写接口路径的话就会绕过zuul配置的jwt认证，所以必须每个需要认证的项目都要开启@EnableWebSecurity
- *
+ *  WebSecurityConfigurerAdapter是对应用中安全框架的个性化定制
  * Created by Tang-QiFeng on 2019/4/9
  */
 @EnableWebSecurity
@@ -46,19 +46,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
+    /**
+     * HTTP请求处理
+     */
     @Override
     public void configure(HttpSecurity http) throws Exception {
         System.out.println("Security加载。。。。。");
         BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager());
     }
-
-    // 该方法是登录的时候会进入
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("项目启动加载2。。。");
-        // 使用自定义身份验证组件
-        auth.authenticationProvider(new CustomAuthenticationProvider(userDetailsService, bCryptPasswordEncoder));
-    }
+    /**
+     * 授权验证服务
+     * 该方法是登录的时候会进入
+     */
+//    @Override
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        System.out.println("项目启动加载2。。。");
+//        // 使用自定义身份验证组件
+//        auth.authenticationProvider(new CustomAuthenticationProvider(userDetailsService, bCryptPasswordEncoder));
+//    }
 
 }
