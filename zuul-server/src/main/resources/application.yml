@@ -8,7 +8,7 @@ spring:
     name: zuul-server
   ##dev：本地环境；prd测试环境
   profiles:
-      active: dev
+      active: prd
 
 eureka:
   client:
@@ -29,6 +29,9 @@ zuul:
 #    fristurl:
 #      path: /fristurl/**
 #      url: http://localhost:9098 #客户端接口地址
+    authcenterurl:
+      path: /authcenterurl/**
+      serviceId: auth-center        #jwt认证中心登录
     adminurl:
       path: /adminurl/**
       serviceId: tqf-admin          #服务提供端
