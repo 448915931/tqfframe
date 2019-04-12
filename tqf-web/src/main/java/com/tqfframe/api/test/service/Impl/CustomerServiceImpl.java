@@ -15,8 +15,4 @@ public class CustomerServiceImpl implements CustomerService {
     @Resource
     private UserDao userDao;
 
-    @Override
-    public void getTest() {
-        System.out.println(userDao.qulitycounts());
-    }
 }

@@ -2,6 +2,7 @@ package com.tqfframe.api.test.controller;
 
 import com.tqfframe.ResultUtil;
 import com.tqfframe.api.test.service.CustomerService;
+import com.tqfframe.common.BaseController;
 import com.tqfframe.util.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +22,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/testapi")
 @Api(value = "测试类管理", description = "测试类管理")
-public class CustomerController {
+public class CustomerController extends BaseController{
 
     private static Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
@@ -40,7 +41,7 @@ public class CustomerController {
     @ApiOperation(value = "消费端测试", notes = "消费端测试")
     @GetMapping(value ="/testhello", produces={"application/json;","text/html;charset=UTF-8;"})
     public ResultUtil testhello(){
-        customerService.getTest();
+        logger.info("用户权限："+getAuthentication());
         redisUtil.lSet("aaa","111");
         return ResultUtil.ok();
     }

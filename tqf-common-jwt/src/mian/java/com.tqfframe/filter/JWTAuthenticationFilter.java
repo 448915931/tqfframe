@@ -49,7 +49,8 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         System.out.println("----------------访问2");
         //如果带了header，进入下面方法
         UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
-        //参数传递authentication对象，来建立安全上下文（security context）
+        //参数传递到authentication对象，来建立安全上下文（security context），也就是权限放入Authentication中，其他类使用
+        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();去获取权限信息等
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
     }

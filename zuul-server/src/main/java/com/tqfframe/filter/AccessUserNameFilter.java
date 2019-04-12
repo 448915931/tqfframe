@@ -19,7 +19,7 @@ public class AccessUserNameFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
         String token = request.getHeader("token");
         if(token != null) {
-            System.out.println("token: " + token);
+//            System.out.println("token: " + token);
             ctx.addZuulRequestHeader("token",request.getHeader("token"));
         }
         System.out.println(String.format("%s AccessUserNameFilter request to %s", request.getMethod(), request.getRequestURL().toString()));

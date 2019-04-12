@@ -8,11 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDao {
 
-    String qulitycounts();
     //查询用户
     UserEntity selectUserinfo(String username);
     //注册用户
     int inserUser(UserEntity user);
-    //用户验证
-    UserEntity selectUser(UserEntity userEntity);
 }

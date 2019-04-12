@@ -50,7 +50,8 @@ public class BasicHttpSecurityConfig {
                     //允许通过的接口
                 .antMatchers("/login",      //登录接口不用过滤
                         "/**/authcenterurl/login",     //登录接口不用过滤
-                        "/**/registe"             //注册接口不用过滤
+                        "/**/registe" ,                 //注册接口不用过滤
+                        "/**/index"                     //登出主页
 //                        ,"/produceapi/hello"      //如果哪个接口不想被认证可以这样
 //                        ,"/api/webapiurl/**"     //允许整个目录不需要认证
                 ).permitAll()
@@ -60,7 +61,7 @@ public class BasicHttpSecurityConfig {
                 .authenticationEntryPoint(
                         new Http401AuthenticationEntryPoint("Basic realm=\"MyApp\"")
                 ).and()
-//                .addFilter(new JWTLoginFilter(authenticationManager))   //加载登陆拦截，因为使用了自定义控制器，所以这里不需要了
+//                .addFilter(new JWTLoginFilter(authenticationManager))   //加载登陆拦截，因为使用了自定义登录控制器，所以这里不需要了
                 .addFilter(new JWTAuthenticationFilter(authenticationManager)); //加载拦截，进行token认证！！！
 //                .logout() // 默认注销行为为logout，可以通过下面的方式来修改
 //                .logoutUrl("/logout")

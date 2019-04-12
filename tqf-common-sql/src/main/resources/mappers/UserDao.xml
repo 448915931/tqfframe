@@ -5,20 +5,16 @@
         <result column="id" property="id" javaType="int"  jdbcType="INTEGER"/>
         <result column="username" property="username" javaType="string"  jdbcType="VARCHAR" />
         <result column="password" property="password" javaType="string"  jdbcType="VARCHAR" />
+        <result column="authority" property="authority" javaType="string"  jdbcType="VARCHAR" />
+        <result column="city" property="city" javaType="string"  jdbcType="VARCHAR" />
     </resultMap>
     <sql id="data">
-         username, password
+         username, password ,authority,city
     </sql>
-    <select id="qulitycounts"   resultType ="java.lang.String" >
-       select count(*) numbers from test
-    </select>
     <select id="selectUserinfo" parameterType="java.lang.String"  resultMap ="BaseResultMap" >
        select *  from tqf_user where username=#{username}
     </select>
-    <select id="selectUser" parameterType="com.tqfframe.entity.UserEntity"  resultMap ="BaseResultMap" >
-       select *  from tqf_user where username=#{username} and password=#{password}
-    </select>
     <insert id="inserUser" parameterType="com.tqfframe.entity.UserEntity" >
-        insert into tqf_user (<include refid="data"/>) values (#{username},#{password})
+        insert into tqf_user (<include refid="data"/>) values (#{username},#{password},#{authority},#{city})
     </insert>
 </mapper>
