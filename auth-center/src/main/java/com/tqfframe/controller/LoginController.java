@@ -1,5 +1,6 @@
 package com.tqfframe.controller;
 
+import com.tqfframe.RedisUtil;
 import com.tqfframe.ResultUtil;
 import com.tqfframe.constant.ConstantKey;
 import com.tqfframe.dao.UserDao;
@@ -34,6 +35,8 @@ public class LoginController  extends BaseController {
 
     @Resource
     private UserDao userDao;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @ApiOperation(value = "自定义登录")
     @PostMapping(value = "/login", produces={"application/json;","text/html;charset=UTF-8;"})
@@ -52,11 +55,13 @@ public class LoginController  extends BaseController {
                 String subject = userVo.getUsername() + "-" + roleList;
                 String token = Jwts.builder()
                         .setSubject(subject)
-                        .setExpiration(new Date(System.currentTimeMillis() + 365 * 24 * 60 * 60 * 1000)) // 设置过期时间 365 * 24 * 60 * 60秒(这里为了方便测试，所以设置了1年的过期时间，实际项目需要根据自己的情况修改)
+                        .setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000)) // 设置过期时间10分钟
                         .signWith(SignatureAlgorithm.HS512, ConstantKey.SIGNING_KEY) //采用什么算法是可以自己选择的，不一定非要采用HS512
                         .compact();
                 // 登录成功后，返回token到header里面
                 response.addHeader("token", "Bearer " + token);
+                //把token放入list
+                redisUtil.lSet("token","Bearer " + token);
                 return ResultUtil.ok("Bearer " + token);
             }
             return ResultUtil.error("密码错误");
@@ -86,7 +91,8 @@ public class LoginController  extends BaseController {
     }
 
     /**
-     * 注销还有点问题，不知道为什么没有清空Authentication
+     *      因为使用拦截器进行注销，所以访问http://localhost:9090/logout 加header进行GET请求注销
+     *
      * @param request
      * @param response
      * @return
@@ -94,6 +100,8 @@ public class LoginController  extends BaseController {
     @ApiOperation(value = "注销用户")
     @GetMapping("/userlogout")
     public ModelAndView userlogout(HttpServletRequest request, HttpServletResponse response) {
+        //删除token缓存
+        redisUtil.del("token"+ request.getHeader("token"));
         //获取的Authentication对象
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null){
@@ -124,6 +132,11 @@ public class LoginController  extends BaseController {
     @GetMapping("/index")
     public ResultUtil index(){
         System.out.println("指定不用认证的一个接口");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication);
+        if (authentication == null){
+            System.out.println("已经是空Authentication了");
+        }
          return ResultUtil.ok("注销成功");
     }
 

@@ -1,10 +1,15 @@
 package com.tqfframe.jwt;
 
+import com.tqfframe.RedisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+
+import javax.annotation.Resource;
 
 /**
  *  一些理解：如果只配zuul的jwt认证，那么进入zuul网关的接口会进行认证。
@@ -18,14 +23,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //配置BCryptPasswordEncoderbean，这样其他类中就可以注入BCryptPasswordEncoder了
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+        return new BCryptPasswordEncoder();
     }
 
+    //把SecurityContextLogoutHandler对象注入到spring容器中，供其他标注了注解的类注入使用！！！
+    @Bean
+    public SecurityContextLogoutHandler securityContextLogoutHandler(){
+        return new SecurityContextLogoutHandler();
+    }
+
+    @Autowired
+    private SecurityContextLogoutHandler securityContextLogoutHandler;
+
+    @Autowired
+    private RedisUtil redisUtil;
+
+    /**
+     * 对所有http请求进行安全认证
+     * @param http
+     * @throws Exception
+     */
     @Override
     public void configure(HttpSecurity http) throws Exception {
         System.out.println("Security加载。。。。。");
-        BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager());
+        BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager(),securityContextLogoutHandler,redisUtil);
     }
 
 }

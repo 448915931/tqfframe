@@ -1,5 +1,7 @@
 package com.tqfframe.jwt;
 
+import com.tqfframe.RedisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+
+import javax.annotation.Resource;
 
 /**
  *  一些理解：如果只配zuul的jwt认证，那么进入zuul网关的接口会进行认证。
@@ -23,12 +28,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
+    //把SecurityContextLogoutHandler对象注入到spring容器中，供其他标注了注解的类注入使用！！！
+    @Bean
+    public SecurityContextLogoutHandler securityContextLogoutHandler(){
+        return new SecurityContextLogoutHandler();
+    }
 
+    @Autowired
+    private SecurityContextLogoutHandler securityContextLogoutHandler;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         System.out.println("Security加载。。。。。");
-        BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager());
+        BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager(),securityContextLogoutHandler,redisUtil);
     }
 
 }

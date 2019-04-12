@@ -1,7 +1,9 @@
 package com.tqfframe.jwt;
 
+import com.tqfframe.RedisUtil;
 import com.tqfframe.filter.JWTAuthenticationFilter;
 import com.tqfframe.filter.JWTLoginFilter;
+import com.tqfframe.filter.JWTLogoutFiter;
 import com.tqfframe.handler.Http401AuthenticationEntryPoint;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,7 +35,7 @@ public class BasicHttpSecurityConfig {
             "/swagge‌​r-ui.html"
     };
 
-    public static void basicHttpSecurity(HttpSecurity http,AuthenticationManager authenticationManager) throws Exception {
+    public static void basicHttpSecurity(HttpSecurity http,AuthenticationManager authenticationManager,SecurityContextLogoutHandler handler,RedisUtil redisUtil) throws Exception {
              //配置需要进过认证的url和不需要认证的url
             http.csrf().disable()   // 由于使用的是JWT，我们这里不需要csrf,csrf是Spring2.0以后默认开起的安全验证，如果使用Security，会冲突，需要关闭掉csrf
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()          // 基于token，所以不需要session
@@ -62,8 +65,9 @@ public class BasicHttpSecurityConfig {
                         new Http401AuthenticationEntryPoint("Basic realm=\"MyApp\"")
                 ).and()
 //                .addFilter(new JWTLoginFilter(authenticationManager))   //加载登陆拦截，因为使用了自定义登录控制器，所以这里不需要了
-                .addFilter(new JWTAuthenticationFilter(authenticationManager)); //加载拦截，进行token认证！！！
-//                .logout() // 默认注销行为为logout，可以通过下面的方式来修改
+                .addFilter(new JWTAuthenticationFilter(authenticationManager,redisUtil)) //加载拦截，进行token认证！！！
+                .addFilter(new JWTLogoutFiter("/api/authcenterurl/userlogout",handler))   //登出拦截
+                .logout(); // 默认注销行为为logout，可以通过下面的方式来修改
 //                .logoutUrl("/logout")
 //                .logoutSuccessUrl("/login")// 设置注销成功后跳转页面，默认是跳转到登录页面;
 //                .permitAll();

@@ -1,5 +1,6 @@
 package com.tqfframe.jwt;
 
+import com.tqfframe.RedisUtil;
 import com.tqfframe.filter.JWTAuthenticationFilter;
 import com.tqfframe.filter.JWTLoginFilter;
 import com.tqfframe.handler.CustomAuthenticationProvider;
@@ -20,6 +21,7 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,13 +35,24 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    //把SecurityContextLogoutHandler对象注入到spring容器中，供其他标注了注解的类注入使用！！！
+    @Bean
+    public SecurityContextLogoutHandler securityContextLogoutHandler(){
+        return new SecurityContextLogoutHandler();
+    }
+
+    @Autowired
+    private SecurityContextLogoutHandler securityContextLogoutHandler;
+    @Autowired
+    private RedisUtil redisUtil;
+
     /**
      * HTTP请求处理
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
         System.out.println("Security加载。。。。。");
-        BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager());
+        BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager(),securityContextLogoutHandler,redisUtil);
     }
     /**
      * 授权验证服务

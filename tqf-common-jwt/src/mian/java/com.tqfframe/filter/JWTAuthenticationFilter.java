@@ -1,5 +1,6 @@
 package com.tqfframe.filter;
 
+import com.tqfframe.RedisUtil;
 import com.tqfframe.constant.ConstantKey;
 import com.tqfframe.exception.TokenException;
 import com.tqfframe.handler.GrantedAuthorityImpl;
@@ -31,8 +32,11 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(JWTAuthenticationFilter.class);
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    private RedisUtil redisUtil;
+
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager,RedisUtil redisUtil) {
         super(authenticationManager);
+        this.redisUtil=redisUtil;
     }
 
 
@@ -42,7 +46,10 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         String header = request.getHeader("token");
         System.out.println("---------------访问1");
         System.out.println(header);
-        if (header == null || !header.startsWith("Bearer ")) {
+        //判断可以是否存在
+        Boolean ishaskey=redisUtil.hasKey("token"+header);
+        System.out.println(ishaskey);
+        if (ishaskey==false || header == null || !header.startsWith("Bearer ")) {
             chain.doFilter(request, response);
             return;
         }
@@ -51,8 +58,8 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
         //参数传递到authentication对象，来建立安全上下文（security context），也就是权限放入Authentication中，其他类使用
         // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();去获取权限信息等
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        chain.doFilter(request, response);
+        SecurityContextHolder.getContext().setAuthentication(authentication);       //set进Authentication
+        chain.doFilter(request, response);  //放行通过
     }
 
     // 解析JWT字符串
@@ -71,7 +78,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     .parseClaimsJws(token.replace("Bearer ", ""))
                     .getBody()
                     .getSubject();
-            System.out.println(user);
+            System.out.println(user);       //解析出用户信息
             long end = System.currentTimeMillis();
             logger.info("执行时间: {}", (end - start) + " 毫秒");
             if (user != null) {
@@ -81,6 +88,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     System.out.println(split[i]);
                     authorities.add(new GrantedAuthorityImpl(split[i]));
                 }
+                System.out.println(authorities);    //权限信息
                 return new UsernamePasswordAuthenticationToken(user, null, authorities);
             }
 

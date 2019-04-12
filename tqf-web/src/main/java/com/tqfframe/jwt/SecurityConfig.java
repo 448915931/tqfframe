@@ -1,5 +1,6 @@
 package com.tqfframe.jwt;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import java.util.List;
 
@@ -26,11 +28,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
+    //把SecurityContextLogoutHandler对象注入到spring容器中，供其他标注了注解的类注入使用！！！
+    @Bean
+    public SecurityContextLogoutHandler securityContextLogoutHandler(){
+        return new SecurityContextLogoutHandler();
+    }
+
+    @Autowired
+    private SecurityContextLogoutHandler securityContextLogoutHandler;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         System.out.println("Security加载。。。。。");
-        BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager());
+        BasicHttpSecurityConfig.basicHttpSecurity(http,authenticationManager(),securityContextLogoutHandler);
     }
 
 }
