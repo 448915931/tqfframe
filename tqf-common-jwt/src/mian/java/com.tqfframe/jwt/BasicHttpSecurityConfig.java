@@ -1,20 +1,14 @@
 package com.tqfframe.jwt;
 
-import com.tqfframe.RedisUtil;
 import com.tqfframe.filter.JWTAuthenticationFilter;
-import com.tqfframe.filter.JWTLoginFilter;
 import com.tqfframe.filter.JWTLogoutFiter;
 import com.tqfframe.handler.Http401AuthenticationEntryPoint;
+import com.tqfframe.redis.RedisUtil;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Tang-QiFeng on 2019/4/10

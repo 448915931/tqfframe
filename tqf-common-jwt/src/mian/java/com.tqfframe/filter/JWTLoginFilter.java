@@ -86,7 +86,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                     .compact();
             System.out.println("token:"+token);
             // 登录成功后，返回token到header里面
-            response.addHeader("token", "Bearer " + token);
+            response.addHeader("token", "Bearer-" + token);
         } catch (Exception e) {
             e.printStackTrace();
         }

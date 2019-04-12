@@ -3,7 +3,7 @@ package com.tqfframe.api.test.controller;
 import com.tqfframe.ResultUtil;
 import com.tqfframe.api.test.service.CustomerService;
 import com.tqfframe.common.BaseController;
-import com.tqfframe.util.RedisUtil;
+import com.tqfframe.redis.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;

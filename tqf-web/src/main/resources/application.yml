@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: prd
+    active: dev
   application:
     name: tqf-web
 

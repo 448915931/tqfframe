@@ -1,12 +1,13 @@
-package com.tqfframe.config;
+package com.tqfframe.redis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-
-
+/**
+ * Created by Tang-QiFeng on 2019/4/12
+ */
 @Configuration
 public class RedisConfig {
 

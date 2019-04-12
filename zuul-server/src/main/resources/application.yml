@@ -8,7 +8,7 @@ spring:
     name: zuul-server
   ##dev：本地环境；prd测试环境
   profiles:
-      active: prd
+      active: dev
 
 eureka:
   client:

@@ -1,17 +1,13 @@
 package com.tqfframe.jwt;
 
-import com.tqfframe.RedisUtil;
+import com.tqfframe.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-
-import javax.annotation.Resource;
 
 /**
  *  一些理解：如果只配zuul的jwt认证，那么进入zuul网关的接口会进行认证。

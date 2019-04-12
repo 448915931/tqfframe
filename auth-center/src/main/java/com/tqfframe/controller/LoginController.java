@@ -1,15 +1,14 @@
 package com.tqfframe.controller;
 
-import com.tqfframe.RedisUtil;
 import com.tqfframe.ResultUtil;
 import com.tqfframe.constant.ConstantKey;
 import com.tqfframe.dao.UserDao;
 import com.tqfframe.entity.UserEntity;
 import com.tqfframe.exception.UsernameIsExitedException;
+import com.tqfframe.redis.RedisUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @RestController
@@ -59,10 +56,10 @@ public class LoginController  extends BaseController {
                         .signWith(SignatureAlgorithm.HS512, ConstantKey.SIGNING_KEY) //采用什么算法是可以自己选择的，不一定非要采用HS512
                         .compact();
                 // 登录成功后，返回token到header里面
-                response.addHeader("token", "Bearer " + token);
+                response.addHeader("token", "Bearer-" + token);
                 //把token放入list
-                redisUtil.lSet("token","Bearer " + token);
-                return ResultUtil.ok("Bearer " + token);
+                redisUtil.set("token:Bearer-" + token,"token");
+                return ResultUtil.ok("Bearer-" + token);
             }
             return ResultUtil.error("密码错误");
         }
@@ -101,7 +98,7 @@ public class LoginController  extends BaseController {
     @GetMapping("/userlogout")
     public ModelAndView userlogout(HttpServletRequest request, HttpServletResponse response) {
         //删除token缓存
-        redisUtil.del("token"+ request.getHeader("token"));
+        redisUtil.del("token:"+request.getHeader("token"));
         //获取的Authentication对象
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null){

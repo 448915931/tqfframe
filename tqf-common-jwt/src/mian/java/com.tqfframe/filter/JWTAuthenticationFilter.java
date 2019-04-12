@@ -1,13 +1,12 @@
 package com.tqfframe.filter;
 
-import com.tqfframe.RedisUtil;
 import com.tqfframe.constant.ConstantKey;
 import com.tqfframe.exception.TokenException;
 import com.tqfframe.handler.GrantedAuthorityImpl;
+import com.tqfframe.redis.RedisUtil;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,9 +46,9 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         System.out.println("---------------访问1");
         System.out.println(header);
         //判断可以是否存在
-        Boolean ishaskey=redisUtil.hasKey("token"+header);
+        Boolean ishaskey=redisUtil.hasKey("token:"+header);
         System.out.println(ishaskey);
-        if (ishaskey==false || header == null || !header.startsWith("Bearer ")) {
+        if (ishaskey==false || header == null || !header.startsWith("Bearer-")) {
             chain.doFilter(request, response);
             return;
         }
@@ -75,7 +74,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         try {
             user = Jwts.parser()
                     .setSigningKey(ConstantKey.SIGNING_KEY)     //通过签名key去判断是自己创建的token
-                    .parseClaimsJws(token.replace("Bearer ", ""))
+                    .parseClaimsJws(token.replace("Bearer-", ""))
                     .getBody()
                     .getSubject();
             System.out.println(user);       //解析出用户信息
