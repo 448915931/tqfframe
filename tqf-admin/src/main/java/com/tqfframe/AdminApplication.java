@@ -2,6 +2,7 @@ package com.tqfframe;
 
 import com.tqfframe.config.TestConfig;
 import com.tqfframe.domain.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -17,9 +18,11 @@ public class AdminApplication
 {
     public static void main(String[] args) {
         SpringApplication.run(AdminApplication.class, args);
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(TestConfig.class);
-        Customer customer = ctx.getBean(Customer.class);
-        customer.setId(11);
-        System.out.println(customer.getId());
+//        ApplicationContext ctx = new AnnotationConfigApplicationContext(TestConfig.class);
+//        Customer customer = ctx.getBean(Customer.class);
+//        customer.setId(11);
+//        System.out.println(customer.getId());
+
     }
+
 }
