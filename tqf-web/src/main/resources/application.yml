@@ -19,3 +19,21 @@ eureka:
     lease:
       duration: 5
 
+#开启熔断
+feign.hystrix.enabled:  true
+
+#feign的调用超时设置
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    #隔离策略，默认是Thread在固定大小线程池中，以单独线程执行，并发请求数受限于线程池大小。
+                    #SEMAPHORE在调用线程中执行，通过信号量来限制并发量。 //必须要加
+                    strategy: SEMAPHORE
+                    thread:
+                        timeoutInMilliseconds: 60000

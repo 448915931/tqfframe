@@ -7,6 +7,10 @@ spring:
   application:
     name: auth-center
 
+#一年token，方便测试用
+jwt:
+  token: Bearer-eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0YW5nLVt0YW5nLCB1c2VyLCDmt7HlnLNdIiwiZXhwIjoxNTU2Njg5NjUwfQ.9epLZvG4ZAcEt03jdIT3I6ISbt3KciiEeQHfB-tEhYx9tKenu__TW3nHxAosJCBNIbWqYMmTn51thHHxBoSHJA
+
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1

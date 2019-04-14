@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -26,11 +23,23 @@ public class CustomerController extends BaseController{
 
     private static Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
+
     @Autowired
     private CustomerService customerService;
 
     @Resource
     private RedisUtil redisUtil;
+
+    /**
+     * 熔断测试，消费者调用服务提供者
+     * @param name
+     * @return
+     */
+    @PostMapping(value = "/testhystrix")
+    public ResultUtil testhystrix(@RequestParam(name = "name") String name){
+        ResultUtil resultUtil=customerService.testhystrix(name);
+        return resultUtil;
+    }
 
     /**
      *    tqf-admin是项目名
@@ -45,4 +54,5 @@ public class CustomerController extends BaseController{
         redisUtil.lSet("aaa","111");
         return ResultUtil.ok();
     }
+
 }

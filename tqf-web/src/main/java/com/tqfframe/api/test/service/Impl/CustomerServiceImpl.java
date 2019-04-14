@@ -1,8 +1,10 @@
 package com.tqfframe.api.test.service.Impl;
 
+import com.tqfframe.ResultUtil;
 import com.tqfframe.api.test.service.CustomerService;
 import com.tqfframe.dao.UserDao;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 
@@ -15,4 +17,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Resource
     private UserDao userDao;
 
+    @Override
+    public ResultUtil testhystrix(@RequestParam(name = "name") String name) {
+        System.out.println("服务提供者出问题了，进入熔断处理");
+        return ResultUtil.error("服务提供者出现故障，进入熔断处理！！！");
+    }
 }

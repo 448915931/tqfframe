@@ -48,6 +48,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--微服务之间调用feign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--netflix-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
        <!-- 增加actuator依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -88,7 +98,7 @@
 
     </dependencies>
 
-   <!-- 只是对版本号进行管理，不会实际引入jar-->
+   <!-- 对所有org.springframework.cloud的版本号进行管理，也就是其他model中的org.springframework.cloud都是同一个版本，不会实际引入jar-->
     <dependencyManagement>
         <dependencies>
             <dependency>

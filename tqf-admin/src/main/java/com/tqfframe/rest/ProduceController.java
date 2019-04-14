@@ -85,14 +85,15 @@ public class ProduceController extends BaseController{
         return ResultUtil.ok();
     }
     /**
-     * 测试控制器
+     * 测试控制器，提供给消费者调用！！！
      * @return
      */
     @ApiOperation(value = "postjson控制器",notes = "json测试")
-    @PostMapping(value = "/postjsontest")
-    public ResultUtil postjsontest(@RequestParam(name = "aaa") String aaa){
-        logger.info(aaa);
-        return ResultUtil.ok();
+    @PostMapping(value = "/testhystrix")
+    public ResultUtil testhystrix(@RequestParam(name = "name") String name){
+        System.out.println("消费者成功调用！！！");
+        logger.info(name);
+        return ResultUtil.ok("消费者成功调用！！！");
     }
 
 }

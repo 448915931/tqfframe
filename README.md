@@ -1,6 +1,12 @@
 # tqfframe
 springboot2.0+Springcloud+zuul+Spring Security+jwt+eureka+mybits+redis+mongodb+solr+es+Swagger2 等
 
+##springBoot 基础框架
+1. eureka 服务与服务的注册中心
+2. Feign 负责服务间的调用
+3. zuul 向外暴露的服务网关
+4. Spring Security 安全框架
+
 ##环境
 jdk1.8以上，mysql，redis
 

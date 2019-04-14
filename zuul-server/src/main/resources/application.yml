@@ -43,6 +43,11 @@ zuul:
       serviceId: tqf-web             #用于提供web服务的接口，消费端
 #    static:
 #      path: /static/**               #静态文件
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+
+
 
 
 

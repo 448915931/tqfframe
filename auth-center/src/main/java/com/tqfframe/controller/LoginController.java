@@ -52,7 +52,7 @@ public class LoginController  extends BaseController {
                 String subject = userVo.getUsername() + "-" + roleList;
                 String token = Jwts.builder()
                         .setSubject(subject)
-                        .setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000)) // 设置过期时间10分钟
+                        .setExpiration(new Date(System.currentTimeMillis() + 365*24*60 * 60 * 1000)) // 设置过期时间10分钟，我这里是弄一个一年的方便测试
                         .signWith(SignatureAlgorithm.HS512, ConstantKey.SIGNING_KEY) //采用什么算法是可以自己选择的，不一定非要采用HS512
                         .compact();
                 // 登录成功后，返回token到header里面
