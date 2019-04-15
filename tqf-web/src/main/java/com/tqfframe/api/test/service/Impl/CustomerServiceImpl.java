@@ -14,12 +14,8 @@ import javax.annotation.Resource;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    @Resource
-    private UserDao userDao;
-
     @Override
     public ResultUtil testhystrix(@RequestParam(name = "name") String name) {
-        System.out.println("服务提供者出问题了，进入熔断处理");
-        return ResultUtil.error("服务提供者出现故障，进入熔断处理！！！");
+        return ResultUtil.error(500,"服务提供者出现故障，进入熔断处理！！！");
     }
 }

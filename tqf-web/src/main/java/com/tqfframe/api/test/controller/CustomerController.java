@@ -27,9 +27,6 @@ public class CustomerController extends BaseController{
     @Autowired
     private CustomerService customerService;
 
-    @Resource
-    private RedisUtil redisUtil;
-
     /**
      * 熔断测试，消费者调用服务提供者
      * @param name
@@ -37,22 +34,7 @@ public class CustomerController extends BaseController{
      */
     @PostMapping(value = "/testhystrix")
     public ResultUtil testhystrix(@RequestParam(name = "name") String name){
-        ResultUtil resultUtil=customerService.testhystrix(name);
-        return resultUtil;
-    }
-
-    /**
-     *    tqf-admin是项目名
-     *    http://localhost:9090/api/webapiurl/testapi/testhello 经过eureka和zuul，实际访问是 http://localhost:9096/testapi/testhello
-     *    http://localhost:9090/api/tqf-web/testapi/testhello
-     * @return
-     */
-    @ApiOperation(value = "消费端测试", notes = "消费端测试")
-    @GetMapping(value ="/testhello", produces={"application/json;","text/html;charset=UTF-8;"})
-    public ResultUtil testhello(){
-        logger.info("用户权限："+getAuthentication());
-        redisUtil.lSet("aaa","111");
-        return ResultUtil.ok();
+        return customerService.testhystrix(name);
     }
 
 }
