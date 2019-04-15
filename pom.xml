@@ -95,7 +95,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
-
+        <!--lombok依赖-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
    <!-- 对所有org.springframework.cloud的版本号进行管理，也就是其他model中的org.springframework.cloud都是同一个版本，不会实际引入jar-->

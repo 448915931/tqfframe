@@ -7,6 +7,10 @@ springboot2.0+Springcloud+zuul+Spring Security+jwt+eureka+mybits+redis+mongodb+s
 3. zuul 向外暴露的服务网关
 4. Spring Security 安全框架
 
+##可用idea插件
+1. lombok插件，实现@get @set @AllArgsConstructor注入，代码更简洁！
+2. MybatisCodeHelper插件 ，实现mybatis自动化构建！
+
 ##环境
 jdk1.8以上，mysql，redis
 

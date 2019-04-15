@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tqfframe.dao.ShopEntityDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.tqfframe.entity.ShopEntity">
+        <result column="id" property="id"/>
+        <result column="shopname" property="shopname"/>
+        <result column="shopprice" property="shopprice"/>
+    </resultMap>
+
+<!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `shopname`,
+        `shopprice`
+    </sql>
+
+    <select id="shoplist" resultMap ="AllColumnMap" >
+        select * from shop_entity
+    </select>
+
+<!--auto generated Code-->
+    <insert id="insert">
+        INSERT INTO `shop_entity`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> `id`, </if>
+            <if test="pojo.shopname != null"> `shopname`, </if>
+            <if test="pojo.shopprice != null"> `shopprice`, </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> #{pojo.id}, </if>
+            <if test="pojo.shopname != null"> #{pojo.shopname}, </if>
+            <if test="pojo.shopprice != null"> #{pojo.shopprice}, </if>
+        </trim>
+    </insert>
+
+<!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO `shop_entity`(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.shopname},
+            #{pojo.shopprice}
+            )
+        </foreach>
+    </insert>
+
+<!--auto generated Code-->
+    <update id="update">
+        UPDATE `shop_entity`
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.shopname != null"> `shopname` = #{pojo.shopname}, </if>
+            <if test="pojo.shopprice != null"> `shopprice` = #{pojo.shopprice} </if>
+        </set>
+         WHERE `id` = #{pojo.id}
+    </update>
+
+</mapper>
