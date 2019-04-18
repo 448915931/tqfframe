@@ -33,6 +33,7 @@ public class CustomerController extends BaseController{
      * @return
      */
     @PostMapping(value = "/testhystrix")
+    @ApiOperation(value = "熔断测试",notes="熔断测试")
     public ResultUtil testhystrix(@RequestParam(name = "name") String name){
         return customerService.testhystrix(name);
     }

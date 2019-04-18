@@ -1,0 +1,25 @@
+##dev：本地环境；prd测试环境
+spring:
+  profiles:
+      active: dev
+  application:
+    name: tqf-escloudurl
+
+server:
+  port: 9094
+
+esindex: "tqf-test-es"
+estype: "testtype"
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+

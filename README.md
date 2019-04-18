@@ -21,14 +21,15 @@ jdk1.8以上，mysql，redis
 ### 各种接口
 1. eureka                        eureka                                             端口 8761
 2. zuul                          zuul代理                                           端口 9090 
-3. auth-center                   Security用户认证中心，登录注册接口。               端口 9095
-4. tqf-web                       服务消费端   web服务的接口 项目名称tqf-web         端口 9096
-5. tqf-admin                     服务提供端   项目名称tqf-admin                     实例1：9097 实例2：9098
-6. tqf-phoneserver               图片服务器   项目名称tqf-phoneserver               端口 9099 
-7. tqf-common-sql  sql           公共方法module，用于当作其他项目的sql依赖
-8. tqf-common-util util          公共方法module，用于当作其他项目的util工具依赖(目前有RedisUtil等)
-9. tqf-common-jwt                jwt是公共的jwt认证module.用于其他项目的Security依赖
-10. tqf-admin2 tqf-admin3。。。  根据具体业务，配置多个服务提供端项目
+3. auth-center                   Security用户认证中心，登录注册接口。                 端口 9095
+4. tqf-web                       服务消费端   web服务的接口 项目名称tqf-web           端口 9096
+5. tqf-admin                     服务提供端   项目名称tqf-admin                       实例1：9097 实例2：9098
+6. tqf-escloud                   es服务提供端 项目名称tqf-escloud                     端口 9094   
+7. tqf-phoneserver               图片服务器   项目名称tqf-phoneserver                 端口 9099 
+8. tqf-common-sql  sql           公共方法module，用于当作其他项目的sql依赖
+9. tqf-common-util util          公共方法module，用于当作其他项目的util工具依赖(目前有RedisUtil等)
+10. tqf-common-jwt                jwt是公共的jwt认证module.用于其他项目的Security依赖
+11. tqf-admin2 tqf-admin3。。。  根据具体业务，配置多个服务提供端项目
 
 ### 项目解释
 tqf-web 服务消费端提供一个web端接口访问的入口，使用Feign去调取其他提供端微服务接口，配置熔断处理。

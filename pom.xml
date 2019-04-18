@@ -19,6 +19,7 @@
         <module>tqf-common-util</module>
         <module>tqf-common-jwt</module>
         <module>auth-center</module>
+        <module>tqf-escloud</module>
     </modules>
 
     <parent>

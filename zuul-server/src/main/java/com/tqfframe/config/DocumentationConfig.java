@@ -66,6 +66,9 @@ public class DocumentationConfig implements SwaggerResourcesProvider {
             case "phoneurl" :
                 name="图片服务器";
                 break;
+            case "escloudurl" :
+                name="es服务器";
+                break;
             default :
                 name="";
         }

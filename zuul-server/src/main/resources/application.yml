@@ -38,6 +38,9 @@ zuul:
     phoneurl:
       path: /phoneurl/**
       serviceId: tqf-phoneserver    #图片服务器接口
+    escloudurl:
+      path: /escloudurl/**
+      serviceId: tqf-escloudurl     #es务器接口
     webapiurl:
       path: /webapiurl/**
       serviceId: tqf-web             #用于提供web服务的接口，消费端

@@ -24,6 +24,14 @@
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.13</version>
         </dependency>
+        <!--阿里 FastJson依赖-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.22</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
