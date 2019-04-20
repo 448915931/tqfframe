@@ -9,7 +9,7 @@ springboot2.0+Springcloud+zuul+Spring Security+jwt+eureka+mybits+redis+mongodb+s
 
 ### 可用idea插件
 1. lombok插件，实现@get @set @AllArgsConstructor注入，代码更简洁！
-2. MybatisCodeHelper插件 ，实现mybatis自动化构建！
+2. MybatisCodeHelper插件 ，实现mybatis自动化构建！！
 
 ### 环境
 jdk1.8以上，mysql，redis
@@ -19,8 +19,8 @@ jdk1.8以上，mysql，redis
 1. eureka服务器地址http://localhost:8761/
 
 ### 各种接口
-1. eureka                        eureka                                             端口 8761
-2. zuul                          zuul代理                                           端口 9090 
+1. eureka                        eureka                                               端口 8761
+2. zuul                          zuul代理                                             端口 9090 
 3. auth-center                   Security用户认证中心，登录注册接口。                 端口 9095
 4. tqf-web                       服务消费端   web服务的接口 项目名称tqf-web           端口 9096
 5. tqf-admin                     服务提供端   项目名称tqf-admin                       实例1：9097 实例2：9098
