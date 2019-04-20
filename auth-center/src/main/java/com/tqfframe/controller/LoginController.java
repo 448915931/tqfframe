@@ -57,7 +57,7 @@ public class LoginController  extends BaseController {
                         .compact();
                 // 登录成功后，返回token到header里面
                 response.addHeader("token", "Bearer-" + token);
-                //把token放入list
+                //把token存入redis
                 redisUtil.set("token:Bearer-" + token,"token");
                 return ResultUtil.ok("Bearer-" + token);
             }
