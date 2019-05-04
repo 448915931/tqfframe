@@ -8,16 +8,19 @@ spring:
     name: zuul-server
   ##dev：本地环境；prd测试环境
   profiles:
-      active: dev
+    active: dev
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-#  instance:
-#    hostname: device
-#    prefer-ip-address: true
-#    status-page-url: http://localhost:8761/swagger-ui.html
+#显示版本号信息，服务器ip地址和端口
+  instance:
+    prefer-ip-address: true
+    hostname: ${spring.cloud.client.ip-address}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
 
 zuul:
   #prefix是包含/api经过下面路由则进行
